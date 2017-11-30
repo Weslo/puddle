@@ -1,51 +1,56 @@
-/* Ask for an OpenGL Core Context */
-#define GLFW_INCLUDE_GLCOREARB
+#include <stdlib.h>
+#include <stdio.h>
 #include <GLFW/glfw3.h>
 
-#define BUFFER_OFFSET(i) ((char *)NULL + (i))
+// Create a static array of verts for our test triangle.
+static const GLfloat triangle_verts[] = {
+    -1.0f, -1.0f, 0.0f,
+    1.0f, -1.0f, 0.0f,
+    0.0f, 1.0f, 0.0f
+};
 
-int main(int argc, char** argv)
-{
-  GLFWwindow* window;
+// Handle a GLFW error.
+void HandleGlfwError(int error, const char* description) {
+    fprintf(stderr, "GLFW error: %s\n", description);
+}
 
-  /* Initialize the library */
-  if ( !glfwInit() )
-  {
-     return -1;
-  }
+// Entry point.
+int main(int argc, char** argv) {
 
-#ifdef __APPLE__
-  /* We need to explicitly ask for a 3.2 context on OS X */
-  glfwWindowHint (GLFW_CONTEXT_VERSION_MAJOR, 3);
-  glfwWindowHint (GLFW_CONTEXT_VERSION_MINOR, 2);
-  glfwWindowHint (GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-  glfwWindowHint (GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-#endif
+    // Initialize GLFW.
+    glfwSetErrorCallback(HandleGlfwError);
+    if(!glfwInit()) {
+        exit(EXIT_FAILURE);
+    }
 
-  /* Create a windowed mode window and its OpenGL context */
-  window = glfwCreateWindow( 1280, 720, "Hello World", NULL, NULL );
-  if (!window)
-  {
-     glfwTerminate();
-     return -1;
-  }
+    // Create the window.
+    GLFWwindow * window = glfwCreateWindow(640, 480, "OpenGL Engine", NULL, NULL);
+    if(!window) {
+        glfwTerminate();
+        exit(EXIT_FAILURE);
+    }
 
-  /* Make the window's context current */
-  glfwMakeContextCurrent(window);
+    // Initialize the OpenGL context.
+    glfwMakeContextCurrent(window);
 
-  /* Loop until the user closes the window */
-  while (!glfwWindowShouldClose(window))
-  {
-    /* Render here */
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear the buffers
+    // Do work while the window is open.
+    while(!glfwWindowShouldClose(window)) {
 
-    /* Swap front and back buffers */
-    glfwSwapBuffers(window);
+        // Size and clear the viewport.
+        int width, height;
+        glfwGetFramebufferSize(window, &width, &height);
+        glViewport(0, 0, width, height);
+        glClear(GL_COLOR_BUFFER_BIT);
 
-    /* Poll for and process events */
-    glfwPollEvents();
-  }
+        // Prepare next frame.
+        glfwSwapBuffers(window);
+        glfwPollEvents();
+    }
 
-  glfwTerminate();
-  return 0;
+    // Free the window context.
+    glfwDestroyWindow(window);
+
+    // Exit process.
+    glfwTerminate();
+    exit(EXIT_SUCCESS);
 }
