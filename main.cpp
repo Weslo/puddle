@@ -58,7 +58,7 @@ int main(int argc, char** argv) {
     glBufferData(GL_ARRAY_BUFFER, sizeof(triangle_verts), triangle_verts, GL_STATIC_DRAW);
 
     // Create a shader and use it.
-    Shader shader = Shader("/Users/Wes/Documents/GitHub/opengl-play/assets/color.vert", "/Users/Wes/Documents/GitHub/opengl-play/assets/color.frag");
+    Shader shader = Shader("../assets/color.vert", "../assets/color.frag");
     shader.Use();
 
     // Do work while the window is open.
