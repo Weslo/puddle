@@ -1,4 +1,5 @@
+mkdir -p bin
 cd bin/
-cmake ../
-make
+cmake ../ || exit 1
+make || exit 1
 ./opengl-play

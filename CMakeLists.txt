@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 2.6)
 project(opengl-play)
 
 if(APPLE)
-    message("apple")
     include_directories(/Developer/Headers/FlatCarbon)
     find_library(COREVID_LIB, CoreVideo)
     find_library(OPENGL_LIB OpenGL)
@@ -24,5 +23,15 @@ if(APPLE)
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -stdlib=libc++ -lglfw")
 endif(APPLE)
 
-add_executable(opengl-play main.cpp)
+include_directories(
+    ${PROJECT_SOURCE_DIR}/glad
+    ${PROJECT_SOURCE_DIR}/glad/KHR
+    ${PROJECT_SOURCE_DIR}/rendering
+    ${PROJECT_SOURCE_DIR}/utils)
+
+add_executable(opengl-play
+    main.cpp glad/glad.c
+    rendering/shader.cpp
+    utils/fileio.cpp)
+
 target_link_libraries(opengl-play ${LIBS})
