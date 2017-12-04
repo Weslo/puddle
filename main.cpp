@@ -5,6 +5,7 @@
 #include "glad/glad.h"
 #include <GLFW/glfw3.h>
 #include "rendering/shader.h"
+#include "rendering/texture.h"
 
 // Create a static array of verts for our test triangle.
 static const GLfloat triangle_verts[] = {
