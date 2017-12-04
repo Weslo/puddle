@@ -7,7 +7,7 @@
 class GameObject {
 public:
     GameObject();
-private:
+protected:
     math::Vector3 position;
 };
 
