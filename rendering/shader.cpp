@@ -1,6 +1,6 @@
-#include "../utils/fileio.h"
-#include "shader.h"
 #include <stdio.h>
+#include "shader.h"
+#include "../utils/fileio.h"
 
 // Create a shader given vertex and fragment shaders.
 Shader::Shader(const char* vertex_shader_path, const char* fragment_shader_path) {
@@ -21,7 +21,7 @@ Shader::Shader(const char* vertex_shader_path, const char* fragment_shader_path)
     glGetProgramiv(program_id, GL_LINK_STATUS, &success);
     if(!success) {
         glGetProgramInfoLog(program_id, 512, NULL, info_log);
-        fprintf(stderr, "Error linking shader prograg %i: %s\n", program_id, info_log);
+        fprintf(stderr, "Error linking shader program %i: %s\n", program_id, info_log);
     }
 
     // Delete the loose shaders.
