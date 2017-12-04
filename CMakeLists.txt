@@ -23,15 +23,27 @@ if(APPLE)
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -stdlib=libc++ -lglfw")
 endif(APPLE)
 
+add_subdirectory(${PROJECT_SOURCE_DIR}/math/glm)
+
 include_directories(
+    ${PROJECT_SOURCE_DIR}/engine
     ${PROJECT_SOURCE_DIR}/glad
     ${PROJECT_SOURCE_DIR}/glad/KHR
+    ${PROJECT_SOURCE_DIR}/math
     ${PROJECT_SOURCE_DIR}/rendering
     ${PROJECT_SOURCE_DIR}/utils)
+    
+file(GLOB ENGINE_SRC ./engine/*.cpp)
+file(GLOB MATH_SRC ./math/*.cpp)
+file(GLOB RENDERING_SRC ./rendering/*.cpp)
+file(GLOB UTILS_SRC ./utils/*.cpp)
 
 add_executable(opengl-play
-    main.cpp glad/glad.c
-    rendering/shader.cpp
-    utils/fileio.cpp)
+    main.cpp
+    glad/glad.c
+    ${ENGINE_SRC}
+    ${MATH_SRC}
+    ${RENDERING_SRC}
+    ${UTILS_SRC})
 
 target_link_libraries(opengl-play ${LIBS})
