@@ -9,6 +9,7 @@ public:
     GameObject();
 protected:
     math::Vector3 position;
+    math::Vector3 rotation;
 };
 
 #endif

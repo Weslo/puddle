@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include "glad/glad.h"
 #include <GLFW/glfw3.h>
+#include "engine/camera.h"
 #include "rendering/mesh.h"
 #include "rendering/shader.h"
 #include "rendering/texture.h"
@@ -43,6 +44,9 @@ int main(int argc, char** argv) {
 
     // Enable z-buffer.
     glEnable(GL_DEPTH_TEST);
+
+    // Create a camera.
+    Camera camera = Camera();
 
     // Create a cube mesh.
     float vertices[] = {
