@@ -21,7 +21,7 @@ Shader::Shader(const char* vertex_shader_path, const char* fragment_shader_path)
     glGetProgramiv(program_id, GL_LINK_STATUS, &success);
     if(!success) {
         glGetProgramInfoLog(program_id, 512, NULL, info_log);
-        fprintf(stderr, "Error linking shader prograg %n: %s\n", program_id, info_log);
+        fprintf(stderr, "Error linking shader prograg %i: %s\n", program_id, info_log);
     }
 
     // Delete the loose shaders.
