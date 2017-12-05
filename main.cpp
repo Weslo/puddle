@@ -61,6 +61,9 @@ int main(int argc, char** argv) {
     };  
     Mesh mesh = Mesh(vertices, sizeof(vertices), indices, sizeof(indices));
 
+    // Create a texture.
+    Texture texture = Texture("../assets/checkermap.png");
+
     // Create a shader and use it.
     Shader shader = Shader("../assets/color.vert", "../assets/color.frag");
     shader.Use();
