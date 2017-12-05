@@ -1,6 +1,5 @@
 #include "mesh.h"
 
-#include <iostream>
 #include "../glad/glad.h"
 #include <GLFW/glfw3.h>
 
@@ -17,4 +16,6 @@ Mesh::Mesh(float* vertices, int length) {
 }
 
 Mesh::~Mesh() {
+    glDeleteVertexArrays(1, &vertex_array);
+    glDeleteBuffers(1, &vertex_buffer);
 }
