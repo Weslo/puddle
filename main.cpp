@@ -48,13 +48,18 @@ int main(int argc, char** argv) {
     // Create a camera.
     Camera camera = Camera();
 
-    // Create a cube mesh.
+    // Create a quad mesh.
     float vertices[] = {
-        -0.5f, -0.5f, 0.0f,
-        0.5f, -0.5f, 0.0f,
-        0.0f,  0.5f, 0.0f
+        0.5f,  0.5f, 0.0f,  // top right
+        0.5f, -0.5f, 0.0f,  // bottom right
+        -0.5f, -0.5f, 0.0f,  // bottom left
+        -0.5f,  0.5f, 0.0f   // top left 
     };
-    Mesh mesh = Mesh(vertices, sizeof(vertices));
+    unsigned int indices[] = {
+        0, 1, 3,   // first triangle
+        1, 2, 3    // second triangle
+    };  
+    Mesh mesh = Mesh(vertices, sizeof(vertices), indices, sizeof(indices));
 
     // Create a shader and use it.
     Shader shader = Shader("../assets/color.vert", "../assets/color.frag");
@@ -73,7 +78,7 @@ int main(int argc, char** argv) {
         // Draw the triangle.
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
-        glDrawArrays(GL_TRIANGLES, 0, 36);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
         glDisableVertexAttribArray(0);
 
         // Prepare next frame.
