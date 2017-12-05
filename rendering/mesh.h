@@ -3,7 +3,7 @@
 
 class Mesh {
 public:
-    Mesh(float* vertices);
+    Mesh(float* vertices, int length);
     ~Mesh();
 private:
     unsigned int vertex_array;
