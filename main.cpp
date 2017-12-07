@@ -48,25 +48,27 @@ int main(int argc, char** argv) {
     // Create a camera.
     Camera camera = Camera();
 
+    // Create a texture.
+    Texture texture = Texture("../assets/checkermap.png");
+
     // Create a quad mesh.
     float vertices[] = {
-        0.5f,  0.5f, 0.0f,  // top right
-        0.5f, -0.5f, 0.0f,  // bottom right
-        -0.5f, -0.5f, 0.0f,  // bottom left
-        -0.5f,  0.5f, 0.0f   // top left 
+        // positions            // tex coords
+        0.5f,  0.5f, 0.0f,      1.0f, 1.0f,
+        0.5f, -0.5f, 0.0f,      1.0f, 0.0f,
+        -0.5f, -0.5f, 0.0f,     0.0f, 0.0f,
+        -0.5f,  0.5f, 0.0f,     0.0f, 1.0f
     };
     unsigned int indices[] = {
         0, 1, 3,   // first triangle
         1, 2, 3    // second triangle
-    };  
+    };
     Mesh mesh = Mesh(vertices, sizeof(vertices), indices, sizeof(indices));
 
-    // Create a texture.
-    Texture texture = Texture("../assets/checkermap.png");
-
     // Create a shader and use it.
-    Shader shader = Shader("../assets/color.vert", "../assets/color.frag");
+    Shader shader = Shader("../assets/diffuse.vert", "../assets/diffuse.frag");
     shader.Use();
+    shader.SetInt("u_texture", 0);
 
     // Do work while the window is open.
     while(!glfwWindowShouldClose(window)) {
@@ -79,10 +81,7 @@ int main(int argc, char** argv) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // Draw the triangle.
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-        glDisableVertexAttribArray(0);
 
         // Prepare next frame.
         glfwSwapBuffers(window);

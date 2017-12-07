@@ -13,6 +13,14 @@ Mesh::Mesh(float* vertices, unsigned int num_vertices) {
     glGenBuffers(1, &vertex_buffer_);
     glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer_);
     glBufferData(GL_ARRAY_BUFFER, num_vertices, vertices, GL_STATIC_DRAW);
+
+    // Position attribute.
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+    
+    // Texture coordinate attribute.
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
 }
 
 Mesh::Mesh(float* vertices, unsigned int num_vertices, unsigned int* indices, unsigned int num_indices) : Mesh::Mesh(vertices, num_vertices) {

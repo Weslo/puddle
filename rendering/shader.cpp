@@ -10,18 +10,18 @@ Shader::Shader(const char* vertex_shader_path, const char* fragment_shader_path)
     int fragment_shader_id = Compile(fragment_shader_path, GL_FRAGMENT_SHADER);
 
     // Create and link the shader program.
-    program_id = glCreateProgram();
-    glAttachShader(program_id, vertex_shader_id);
-    glAttachShader(program_id, fragment_shader_id);
-    glLinkProgram(program_id);
+    program_id_ = glCreateProgram();
+    glAttachShader(program_id_, vertex_shader_id);
+    glAttachShader(program_id_, fragment_shader_id);
+    glLinkProgram(program_id_);
 
     // Check the status of the linked program.
     int success;
     char info_log[512];
-    glGetProgramiv(program_id, GL_LINK_STATUS, &success);
+    glGetProgramiv(program_id_, GL_LINK_STATUS, &success);
     if(!success) {
-        glGetProgramInfoLog(program_id, 512, NULL, info_log);
-        fprintf(stderr, "Error linking shader program %i: %s\n", program_id, info_log);
+        glGetProgramInfoLog(program_id_, 512, NULL, info_log);
+        fprintf(stderr, "Error linking shader program %i: %s\n", program_id_, info_log);
     }
 
     // Delete the loose shaders.
@@ -31,7 +31,12 @@ Shader::Shader(const char* vertex_shader_path, const char* fragment_shader_path)
 
 // Use this shader for rendering.
 void Shader::Use() {
-    glUseProgram(program_id);
+    glUseProgram(program_id_);
+}
+
+// Set an integer uniform in the shader.
+void Shader::SetInt(const char* name, int value) {
+    glUniform1i(glGetUniformLocation(program_id_, name), value);
 }
 
 // Compile a shader and return its ID.

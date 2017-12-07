@@ -8,8 +8,9 @@ class Shader {
 public:
     Shader(const char* vertex_shader_path, const char* fragment_shader_path);
     void Use();
+    void SetInt(const char* name, int value);
 private:
-    unsigned int program_id;
+    unsigned int program_id_;
     unsigned int Compile(const char* filepath, GLuint shaderType);
 };
 
