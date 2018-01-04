@@ -9,6 +9,7 @@ Texture::Texture(const char* img_path) {
 
     // Load the texture from the file.
     int numChannels;
+    stbi_set_flip_vertically_on_load(true);
     unsigned char* data = stbi_load(img_path, &width_, &height_, &numChannels, 0);
     if(data) {
 
