@@ -1,7 +1,7 @@
 #ifndef RENDERING_SHADER_H_
 #define RENDERING_SHADER_H_
 
-#include <GLFW/glfw3.h>
+#include "GLFW/glfw3.h"
 
 // Virtual interface for a GLSL shader.
 class Shader {
