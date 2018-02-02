@@ -5,7 +5,7 @@
 
 #include "texture.h"
 
-Texture::Texture(const char* img_path) {
+rendering::Texture::Texture(const char* img_path) {
 
     // Load the texture from the file.
     int numChannels;

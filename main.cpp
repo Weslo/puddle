@@ -46,10 +46,10 @@ int main(int argc, char** argv) {
     glEnable(GL_DEPTH_TEST);
 
     // Create a camera.
-    Camera camera = Camera();
+    auto camera = engine::Camera();
 
     // Create a texture.
-    Texture texture = Texture("../assets/checkermap.png");
+    auto texture = rendering::Texture("../assets/checkermap.png");
 
     // Create a quad mesh.
     float vertices[] = {
@@ -63,10 +63,10 @@ int main(int argc, char** argv) {
         0, 1, 3,   // first triangle
         1, 2, 3    // second triangle
     };
-    Mesh mesh = Mesh(vertices, sizeof(vertices), indices, sizeof(indices));
+    auto mesh = rendering::Mesh(vertices, sizeof(vertices), indices, sizeof(indices));
 
     // Create a shader and use it.
-    Shader shader = Shader("../assets/diffuse.vert", "../assets/diffuse.frag");
+    auto shader = rendering::Shader("../assets/diffuse.vert", "../assets/diffuse.frag");
     shader.Use();
     shader.SetInt("u_texture", 0);
 

@@ -1,9 +1,8 @@
 #include "mesh.h"
-
 #include "../glad/glad.h"
 #include "GLFW/glfw3.h"
 
-Mesh::Mesh(float* vertices, unsigned int num_vertices) {
+rendering::Mesh::Mesh(float* vertices, unsigned int num_vertices) {
 
     // Create a vertex array object.
     glGenVertexArrays(1, &vertex_array_);
@@ -23,7 +22,7 @@ Mesh::Mesh(float* vertices, unsigned int num_vertices) {
     glEnableVertexAttribArray(1);
 }
 
-Mesh::Mesh(float* vertices, unsigned int num_vertices, unsigned int* indices, unsigned int num_indices) : Mesh::Mesh(vertices, num_vertices) {
+rendering::Mesh::Mesh(float* vertices, unsigned int num_vertices, unsigned int* indices, unsigned int num_indices) : Mesh::Mesh(vertices, num_vertices) {
 
     // Create an index buffer object.
     glGenBuffers(1, &index_buffer_);
@@ -31,7 +30,7 @@ Mesh::Mesh(float* vertices, unsigned int num_vertices, unsigned int* indices, un
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, num_indices, indices, GL_STATIC_DRAW);
 }
 
-Mesh::~Mesh() {
+rendering::Mesh::~Mesh() {
     glDeleteVertexArrays(1, &vertex_array_);
     glDeleteBuffers(1, &vertex_buffer_);
 }

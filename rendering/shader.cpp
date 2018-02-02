@@ -3,7 +3,7 @@
 #include "../utils/fileio.h"
 
 // Create a shader given vertex and fragment shaders.
-Shader::Shader(const char* vertex_shader_path, const char* fragment_shader_path) {
+rendering::Shader::Shader(const char* vertex_shader_path, const char* fragment_shader_path) {
 
     // Compile both shaders.
     int vertex_shader_id = Compile(vertex_shader_path, GL_VERTEX_SHADER);
@@ -30,17 +30,17 @@ Shader::Shader(const char* vertex_shader_path, const char* fragment_shader_path)
 }
 
 // Use this shader for rendering.
-void Shader::Use() {
+void rendering::Shader::Use() {
     glUseProgram(program_id_);
 }
 
 // Set an integer uniform in the shader.
-void Shader::SetInt(const char* name, int value) {
+void rendering::Shader::SetInt(const char* name, int value) {
     glUniform1i(glGetUniformLocation(program_id_, name), value);
 }
 
 // Compile a shader and return its ID.
-unsigned int Shader::Compile(const char* filepath, GLuint shader_type) {
+unsigned int rendering::Shader::Compile(const char* filepath, GLuint shader_type) {
     
     // Parse the file before we start allocating the shader.
     char* file_content;

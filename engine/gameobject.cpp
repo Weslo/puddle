@@ -1,4 +1,7 @@
 #include "gameobject.h"
 
-GameObject::GameObject() {
+engine::GameObject::GameObject() {
+}
+
+engine::GameObject::~GameObject() {
 }

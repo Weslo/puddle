@@ -4,6 +4,7 @@
 #include "GLFW/glfw3.h"
 
 // Virtual interface for a GLSL shader.
+namespace rendering {
 class Shader {
 public:
     Shader(const char* vertex_shader_path, const char* fragment_shader_path);
@@ -13,5 +14,6 @@ private:
     unsigned int program_id_;
     unsigned int Compile(const char* filepath, GLuint shaderType);
 };
+}
 
 #endif // RENDERING_SHADER_H_
