@@ -8,10 +8,20 @@ class Vector3 {
 public:
     Vector3();
     Vector3(float x, float y, float z);
-    
-    void Set(float x, float y, float z);
+
+    float get_x() const;
+    float get_y() const;
+    float get_z() const;
+
+    Vector3& set_x(float x);
+    Vector3& set_y(float y);
+    Vector3& set_z(float z);
+
+    Vector3& set(float x, float y, float z);
 private:
-    glm::vec3 vector_;
+    float x_;
+    float y_;
+    float z_;
 };
 } // namespace math
 

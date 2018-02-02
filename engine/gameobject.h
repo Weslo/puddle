@@ -10,8 +10,8 @@ public:
     GameObject();
     virtual ~GameObject();
 protected:
-    math::Vector3 position;
-    math::Vector3 rotation;
+    math::Vector3 position_;
+    math::Vector3 rotation_;
 };
 }
 
