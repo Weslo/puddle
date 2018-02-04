@@ -9,29 +9,29 @@ math::Vector3::Vector3(float x, float y, float z)
     , z_ { z }
 {}
 
-float math::Vector3::get_x() const {
+float math::Vector3::x() const {
     return x_;
 }
 
-float math::Vector3::get_y() const {
+float math::Vector3::y() const {
     return y_;
 }
 
-float math::Vector3::get_z() const {
+float math::Vector3::z() const {
     return z_;
 }
 
-math::Vector3& math::Vector3::set_x(float x) {
+math::Vector3& math::Vector3::x(float x) {
     x_ = x;
     return *this;
 }
 
-math::Vector3& math::Vector3::set_y(float y) {
+math::Vector3& math::Vector3::y(float y) {
     y_ = y;
     return *this;
 }
 
-math::Vector3& math::Vector3::set_z(float z) {
+math::Vector3& math::Vector3::z(float z) {
     z_ = z;
     return *this;
 }

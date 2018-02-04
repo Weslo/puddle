@@ -5,6 +5,7 @@ namespace rendering {
 class Texture {
 public:
     Texture(const char* img_path);
+    ~Texture();
 private:
     unsigned int texture_id_;
     int width_;

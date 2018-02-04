@@ -38,3 +38,7 @@ rendering::Texture::Texture(const char* img_path) {
         fprintf(stderr, "Error loading texture at: %s\n", img_path);
     }
 }
+
+rendering::Texture::~Texture() {
+    glDeleteTextures(1, &texture_id_);
+}
