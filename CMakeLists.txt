@@ -32,7 +32,7 @@ include_directories(
     ${PROJECT_SOURCE_DIR}/math
     ${PROJECT_SOURCE_DIR}/rendering
     ${PROJECT_SOURCE_DIR}/utils)
-    
+
 file(GLOB ENGINE_SRC ./engine/*.cpp)
 file(GLOB MATH_SRC ./math/*.cpp)
 file(GLOB RENDERING_SRC ./rendering/*.cpp)

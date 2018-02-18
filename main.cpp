@@ -51,19 +51,54 @@ int main(int argc, char** argv) {
     // Create a texture.
     auto texture = rendering::Texture("../assets/checkermap.png");
 
-    // Create a quad mesh.
-    float vertices[] = {
-        // positions            // tex coords
-        0.5f, 0.5f, 0.0f,      1.0f, 1.0f,
-        0.5f, -0.5f, 0.0f,      1.0f, 0.0f,
-        -0.5f, -0.5f, 0.0f,     0.0f, 0.0f,
-        -0.5f, 0.5f, 0.0f,     0.0f, 1.0f
+    // Create a cube mesh.
+    float cube_verts[] = {
+        -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+         0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
+         0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+         0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+
+        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+         0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+         0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+         0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+        -0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
+        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+
+        -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+        -0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+        -0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+         0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+         0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+         0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+         0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+         0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+         0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+         0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
+         0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+         0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+
+        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+         0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+         0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+         0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+        -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
+        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
     };
-    unsigned int indices[] = {
-        0, 1, 3,   // first triangle
-        1, 2, 3    // second triangle
-    };
-    auto mesh = rendering::Mesh(vertices, sizeof(vertices), indices, sizeof(indices));
+    auto mesh = rendering::Mesh(cube_verts, sizeof(cube_verts));
+
+    // Create a model matrix for the cube.
+    glm::mat4x4 model;
 
     // Create a shader and use it.
     auto shader = rendering::Shader("../assets/diffuse.vert", "../assets/diffuse.frag");
@@ -76,12 +111,19 @@ int main(int argc, char** argv) {
         // Size and clear the viewport.
         int width, height;
         glfwGetFramebufferSize(window, &width, &height);
+        camera.aspect_ratio(width / height);
         glViewport(0, 0, width, height);
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        // Draw the triangle.
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        // Rotate the cube.
+        model = glm::rotate(model, (float)glfwGetTime() * glm::radians(1.0f), glm::vec3(0.5f, 1.0f, 0.0f));
+        shader.SetMatrix4x4("model", model);
+        shader.SetMatrix4x4("view", camera.view());
+        shader.SetMatrix4x4("projection", camera.projection());
+
+        // Draw the cube.
+        glDrawArrays(GL_TRIANGLES, 0, 36);
 
         // Prepare next frame.
         glfwSwapBuffers(window);

@@ -14,11 +14,13 @@ public:
 
     float aspect_ratio() const;
     Camera& aspect_ratio(float aspect_ratio);
+
+    glm::mat4x4 view() const;
+    glm::mat4x4 projection() const;
 private:
 
     float aspect_ratio_;
 
-    glm::mat4x4 model_;
     glm::mat4x4 view_;
     glm::mat4x4 projection_;
 };

@@ -39,9 +39,14 @@ void rendering::Shader::SetInt(const char* name, int value) {
     glUniform1i(glGetUniformLocation(program_id_, name), value);
 }
 
+// Set a matrix uniform in the shader.
+void rendering::Shader::SetMatrix4x4(const char *name, glm::mat4x4 matrix) {
+    glUniformMatrix4fv(glGetUniformLocation(program_id_, name), 1, GL_FALSE, glm::value_ptr(matrix));
+}
+
 // Compile a shader and return its ID.
 unsigned int rendering::Shader::Compile(const char* filepath, GLuint shader_type) {
-    
+
     // Parse the file before we start allocating the shader.
     char* file_content;
     unsigned long file_length;
