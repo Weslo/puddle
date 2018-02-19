@@ -9,6 +9,8 @@ class GameObject {
 public:
     GameObject();
     virtual ~GameObject();
+
+    math::Vector3& position();
 protected:
     math::Vector3 position_;
     math::Vector3 rotation_;
