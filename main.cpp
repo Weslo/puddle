@@ -15,11 +15,6 @@ void HandleGlfwError(int error, const char* description) {
     fprintf(stderr, "GLFW error: %s\n", description);
 }
 
-// Handle mouse input.
-void handle_mouse_input(GLFWwindow* window, double screen_x, double screen_y) {
-    input::Mouse::screen_pos(screen_x, screen_y);
-}
-
 // Entry point.
 int main(int argc, char** argv) {
 
@@ -48,8 +43,8 @@ int main(int argc, char** argv) {
     glfwMakeContextCurrent(window);
     gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 
-    // Establish window callbacks.
-    glfwSetCursorPosCallback(window, handle_mouse_input);
+    // Lock cursor to screen.
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     // Enable z-buffer.
     glEnable(GL_DEPTH_TEST);
@@ -125,8 +120,13 @@ int main(int argc, char** argv) {
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        // Update input.
+        double screen_x, screen_y;
+        glfwGetCursorPos(window, &screen_x, &screen_y);
+        input::Mouse::screen_pos(screen_x, screen_y);
+
         // Rotate the cube.
-        model = glm::rotate(model, (float)glfwGetTime() * glm::radians(1.0f), glm::vec3(0.5f, 1.0f, 0.0f));
+        model = glm::rotate(model, glm::radians(input::Mouse::delta_screen_pos().x()), glm::vec3(0.5f, 1.0f, 0.0f));
         shader.SetMatrix4x4("model", model);
         shader.SetMatrix4x4("view", camera.view());
         shader.SetMatrix4x4("projection", camera.projection());
