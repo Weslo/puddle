@@ -5,6 +5,7 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include "engine/camera.h"
+#include "input/mouse.h"
 #include "rendering/mesh.h"
 #include "rendering/shader.h"
 #include "rendering/texture.h"
@@ -12,6 +13,11 @@
 // Handle a GLFW error.
 void HandleGlfwError(int error, const char* description) {
     fprintf(stderr, "GLFW error: %s\n", description);
+}
+
+// Handle mouse input.
+void handle_mouse_input(GLFWwindow* window, double screen_x, double screen_y) {
+    input::Mouse::screen_pos(screen_x, screen_y);
 }
 
 // Entry point.
@@ -41,6 +47,9 @@ int main(int argc, char** argv) {
     // Initialize the OpenGL context.
     glfwMakeContextCurrent(window);
     gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+
+    // Establish window callbacks.
+    glfwSetCursorPosCallback(window, handle_mouse_input);
 
     // Enable z-buffer.
     glEnable(GL_DEPTH_TEST);

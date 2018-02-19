@@ -2,7 +2,6 @@
 
 engine::Camera::Camera() : engine::GameObject() {
     position_.set(0.0f, 0.0f, -3.0f);
-    view_ = glm::translate(view_, glm::vec3(position_.x(), position_.y(), position_.z()));
 }
 
 engine::Camera::~Camera() {
@@ -20,7 +19,7 @@ engine::Camera& engine::Camera::aspect_ratio(float aspect_ratio) {
 }
 
 glm::mat4x4 engine::Camera::view() const {
-    return view_;
+    return glm::translate(view_, glm::vec3(position_.x(), position_.y(), position_.z()));
 }
 
 glm::mat4x4 engine::Camera::projection() const {
