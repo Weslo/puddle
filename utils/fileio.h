@@ -1,8 +1,10 @@
-#ifndef UTILS_FILEIO_H_
-#define UTILS_FILEIO_H_
+#ifndef PUDDLE_UTILS_FILEIO_H_
+#define PUDDLE_UTILS_FILEIO_H_
 
+namespace puddle {
 namespace utils {
     int ParseFile(const char* filepath, char** contents, unsigned long* length);
-} // namespace utils
+}
+}
 
-#endif // UTILS_FILEIO_H_
+#endif

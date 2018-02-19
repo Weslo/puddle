@@ -1,7 +1,7 @@
-#ifndef TEXTURE_H_
-#define TEXTURE_H_
+#ifndef PUDDLE_TEXTURE_H_
+#define PUDDLE_TEXTURE_H_
 
-namespace rendering {
+namespace puddle {
 class Texture {
 public:
     Texture(const char* img_path);

@@ -1,11 +1,11 @@
 #include "gameobject.h"
 
-engine::GameObject::GameObject() {
+puddle::GameObject::GameObject() {
 }
 
-engine::GameObject::~GameObject() {
+puddle::GameObject::~GameObject() {
 }
 
-math::Vector3& engine::GameObject::position() {
+puddle::Vector3& puddle::GameObject::position() {
     return position_;
 }

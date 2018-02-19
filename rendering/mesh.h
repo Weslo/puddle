@@ -1,7 +1,7 @@
-#ifndef RENDERING_MESH_H_
-#define RENDERING_MESH_H_
+#ifndef PUDDLE_MESH_H_
+#define PUDDLE_MESH_H_
 
-namespace rendering {
+namespace puddle {
 class Mesh {
 public:
     Mesh(float* vertices, unsigned int num_vertices);

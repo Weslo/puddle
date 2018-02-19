@@ -3,7 +3,7 @@
 #include "../utils/fileio.h"
 
 // Create a shader given vertex and fragment shaders.
-rendering::Shader::Shader(const char* vertex_shader_path, const char* fragment_shader_path) {
+puddle::Shader::Shader(const char* vertex_shader_path, const char* fragment_shader_path) {
 
     // Compile both shaders.
     int vertex_shader_id = Compile(vertex_shader_path, GL_VERTEX_SHADER);
@@ -29,28 +29,28 @@ rendering::Shader::Shader(const char* vertex_shader_path, const char* fragment_s
     glDeleteShader(fragment_shader_id);
 }
 
-// Use this shader for rendering.
-void rendering::Shader::Use() {
+// Use this shader for puddle.
+void puddle::Shader::Use() {
     glUseProgram(program_id_);
 }
 
 // Set an integer uniform in the shader.
-void rendering::Shader::SetInt(const char* name, int value) {
+void puddle::Shader::SetInt(const char* name, int value) {
     glUniform1i(glGetUniformLocation(program_id_, name), value);
 }
 
 // Set a matrix uniform in the shader.
-void rendering::Shader::SetMatrix4x4(const char *name, glm::mat4x4 matrix) {
+void puddle::Shader::SetMatrix4x4(const char *name, glm::mat4x4 matrix) {
     glUniformMatrix4fv(glGetUniformLocation(program_id_, name), 1, GL_FALSE, glm::value_ptr(matrix));
 }
 
 // Compile a shader and return its ID.
-unsigned int rendering::Shader::Compile(const char* filepath, GLuint shader_type) {
+unsigned int puddle::Shader::Compile(const char* filepath, GLuint shader_type) {
 
     // Parse the file before we start allocating the shader.
     char* file_content;
     unsigned long file_length;
-    int parse_result = utils::ParseFile(filepath, &file_content, &file_length);
+    int parse_result = puddle::utils::ParseFile(filepath, &file_content, &file_length);
     if(parse_result < 0) {
         fprintf(stderr, "Error parsing shader at %s\n", filepath);
     }

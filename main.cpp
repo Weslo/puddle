@@ -51,10 +51,10 @@ int main(int argc, char** argv) {
     glEnable(GL_DEPTH_TEST);
 
     // Create a camera.
-    auto camera = engine::Camera();
+    auto camera = puddle::Camera();
 
     // Create a texture.
-    auto texture = rendering::Texture("../assets/checkermap.png");
+    auto texture = puddle::Texture("../assets/checkermap.png");
 
     // Create a cube mesh.
     float cube_verts[] = {
@@ -100,13 +100,13 @@ int main(int argc, char** argv) {
         -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
         -0.5f,  0.5f, -0.5f,  0.0f, 1.0f
     };
-    auto mesh = rendering::Mesh(cube_verts, sizeof(cube_verts));
+    auto mesh = puddle::Mesh(cube_verts, sizeof(cube_verts));
 
     // Create a model matrix for the cube.
     glm::mat4x4 model;
 
     // Create a shader and use it.
-    auto shader = rendering::Shader("../assets/diffuse.vert", "../assets/diffuse.frag");
+    auto shader = puddle::Shader("../assets/diffuse.vert", "../assets/diffuse.frag");
     shader.Use();
     shader.SetInt("u_texture", 0);
 
@@ -124,7 +124,7 @@ int main(int argc, char** argv) {
         // Update cursor input.
         double screen_x, screen_y;
         glfwGetCursorPos(window, &screen_x, &screen_y);
-        input::Mouse::screen_pos(screen_x, screen_y);
+        puddle::input::Mouse::screen_pos(screen_x, screen_y);
 
         // Update WASD input.
         float camera_speed = 0.01f;
@@ -142,8 +142,8 @@ int main(int argc, char** argv) {
         }
 
         // Rotate the cube.
-        model = glm::rotate(model, glm::radians(input::Mouse::delta_screen_pos().x()), glm::vec3(0.0f, 1.0f, 0.0f));
-        model = glm::rotate(model, glm::radians(input::Mouse::delta_screen_pos().y()), glm::vec3(1.0f, 0.0f, 0.0f));
+        model = glm::rotate(model, glm::radians(puddle::input::Mouse::delta_screen_pos().x()), glm::vec3(0.0f, 1.0f, 0.0f));
+        model = glm::rotate(model, glm::radians(puddle::input::Mouse::delta_screen_pos().y()), glm::vec3(1.0f, 0.0f, 0.0f));
         shader.SetMatrix4x4("model", model);
         shader.SetMatrix4x4("view", camera.view());
         shader.SetMatrix4x4("projection", camera.projection());

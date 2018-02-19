@@ -3,7 +3,7 @@
 #include "fileio.h"
 
 // Parse the file at filepath and fill contents and length.
-int utils::ParseFile(const char* filepath, char** contents, unsigned long* length) {
+int puddle::utils::ParseFile(const char* filepath, char** contents, unsigned long* length) {
 
     // Open a filestream.
     std::ifstream file;
@@ -24,7 +24,7 @@ int utils::ParseFile(const char* filepath, char** contents, unsigned long* lengt
     // Allocate a buffer to store the data.
     char* buffer = new char[len + 1];
     buffer[len] = 0;
-    
+
     // Read contents into buffer.
     unsigned int i = 0;
     char c;

@@ -1,9 +1,9 @@
-#ifndef MATH_VECTOR3_H_
-#define MATH_VECTOR3_H_
+#ifndef PUDDLE_VECTOR3_H_
+#define PUDDLE_VECTOR3_H_
 
 #include "vector2.h"
 
-namespace math {
+namespace puddle {
 class Vector3 : public Vector2 {
 public:
     Vector3();

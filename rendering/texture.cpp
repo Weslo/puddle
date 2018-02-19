@@ -5,7 +5,7 @@
 
 #include "texture.h"
 
-rendering::Texture::Texture(const char* img_path) {
+puddle::Texture::Texture(const char* img_path) {
 
     // Load the texture from the file.
     int numChannels;
@@ -39,6 +39,6 @@ rendering::Texture::Texture(const char* img_path) {
     }
 }
 
-rendering::Texture::~Texture() {
+puddle::Texture::~Texture() {
     glDeleteTextures(1, &texture_id_);
 }

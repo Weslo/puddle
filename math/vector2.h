@@ -1,7 +1,7 @@
-#ifndef MATH_VECTOR2_H_
-#define MATH_VECTOR2_H_
+#ifndef PUDDLE_VECTOR2_H_
+#define PUDDLE_VECTOR2_H_
 
-namespace math {
+namespace puddle {
 class Vector2 {
 public:
     Vector2();
