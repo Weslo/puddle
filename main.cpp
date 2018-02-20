@@ -2,9 +2,12 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
-#include "math/glm/gtc/quaternion.hpp"
+#include "math/glm/gtx/quaternion.hpp"
+#include "math/quaternion.h"
+#include "math/vector3.h"
 #include "engine/camera.h"
 #include "input/mouse.h"
 #include "rendering/mesh.h"
@@ -142,8 +145,8 @@ int main(int argc, char** argv) {
         }
 
         // Rotate the cube.
-        model = glm::rotate(model, glm::radians(puddle::input::Mouse::delta_screen_pos().x()), glm::vec3(0.0f, 1.0f, 0.0f));
-        model = glm::rotate(model, glm::radians(puddle::input::Mouse::delta_screen_pos().y()), glm::vec3(1.0f, 0.0f, 0.0f));
+        puddle::Quaternion rot = puddle::Quaternion::from_angle_axis(2.0f * M_PI * (90.0f / 360.0f), puddle::Vector3(0, 1, 0));
+        model = glm::toMat4(glm::quat(rot.x(), rot.y(), rot.z(), rot.w()));
         shader.SetMatrix4x4("model", model);
         shader.SetMatrix4x4("view", camera.view());
         shader.SetMatrix4x4("projection", camera.projection());
