@@ -16,10 +16,10 @@ puddle::Quaternion puddle::Quaternion::from_angle_axis(float angle, const puddle
 }
 
 puddle::Vector3 puddle::Quaternion::euler_angles() const {
-    float roll = atan2(+2.0 * (w_ * w_ + y_ * z_), +1.0 * (x_ * x_ + y_ * y_));
-    float pitch = +2.0 * (w_ * y_ - z_ * x_);
+    float roll = atan2(2.0 * (w_ * w_ + y_ * z_), 1.0 * (x_ * x_ + y_ * y_));
+    float pitch = 2.0 * (w_ * y_ - z_ * x_);
     pitch = fabs(pitch) >= 1 ? copysign(M_PI / 2, pitch) : asin(pitch);
-    float yaw = atan2(+2.0 * (w_ * z_ + x_ * y_), +1.0 - 2.0 * (y_ * y_ + z_ * z_));
+    float yaw = atan2(2.0 * (w_ * z_ + x_ * y_), 1.0 - 2.0 * (y_ * y_ + z_ * z_));
     return puddle::Vector3(roll, pitch, yaw);
 }
 
