@@ -10,6 +10,7 @@ public:
     Quaternion(float x, float y, float z, float w);
 
     static Quaternion from_angle_axis(float angle, const Vector3& axis);
+    static Quaternion from_euler_angles(float x, float y, float z);
 
     Vector3 euler_angles() const;
 
