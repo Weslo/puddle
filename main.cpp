@@ -145,7 +145,7 @@ int main(int argc, char** argv) {
         }
 
         // Rotate the cube.
-        puddle::Quaternion rot = puddle::Quaternion::from_angle_axis(2.0f * M_PI * (90.0f / 360.0f), puddle::Vector3(0, 1, 0));
+        puddle::Quaternion rot = puddle::Quaternion(2.0f * M_PI * (90.0f / 360.0f), puddle::Vector3(0, 1, 0));
         model = glm::toMat4(glm::quat(rot.x(), rot.y(), rot.z(), rot.w()));
         shader.SetMatrix4x4("model", model);
         shader.SetMatrix4x4("view", camera.view());

@@ -7,6 +7,9 @@ public:
     Vector2();
     Vector2(float x, float y);
 
+    bool operator==(const Vector2& other) const;
+    bool operator!=(const Vector2& other) const;
+
     float x() const;
     float y() const;
 

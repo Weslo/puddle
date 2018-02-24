@@ -8,6 +8,14 @@ puddle::Vector2::Vector2(float x, float y)
     , y_ { y }
 {}
 
+bool puddle::Vector2::operator==(const puddle::Vector2& other) const {
+    return x() == other.x() && y() == other.y();
+}
+
+bool puddle::Vector2::operator!=(const puddle::Vector2& other) const {
+    return x() != other.x() || y() != other.y();
+}
+
 float puddle::Vector2::x() const {
     return x_;
 }

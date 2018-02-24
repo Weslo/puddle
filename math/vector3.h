@@ -9,6 +9,9 @@ public:
     Vector3();
     Vector3(float x, float y, float z);
 
+    bool operator==(const Vector3& other) const;
+    bool operator!=(const Vector3& other) const;
+
     float z() const;
     Vector3& z(float z);
 

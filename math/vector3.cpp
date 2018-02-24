@@ -8,6 +8,14 @@ puddle::Vector3::Vector3(float x, float y, float z)
     , z_ { z }
 {}
 
+bool puddle::Vector3::operator==(const Vector3& other) const {
+    return puddle::Vector2::operator==(other) && z() == other.z();
+}
+
+bool puddle::Vector3::operator!=(const Vector3& other) const {
+    return z() != other.z() || puddle::Vector2::operator!=(other);
+}
+
 float puddle::Vector3::z() const {
     return z_;
 }

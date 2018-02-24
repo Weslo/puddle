@@ -50,3 +50,6 @@ add_executable(opengl-play
     ${UTILS_SRC})
 
 target_link_libraries(opengl-play ${LIBS})
+
+# Include tests
+add_subdirectory(${PROJECT_SOURCE_DIR}/math/tests)

@@ -10,30 +10,35 @@ puddle::Quaternion::Quaternion(float x, float y, float z, float w)
     , w_ { w }
 {}
 
-puddle::Quaternion puddle::Quaternion::from_angle_axis(float angle, const puddle::Vector3& axis) {
+puddle::Quaternion::Quaternion(float angle, const puddle::Vector3& axis)
+    : w_ { cos(angle / 2) }
+{
     float s = sin(angle / 2);
-    return Quaternion(axis.x() * s, axis.y() * s, axis.z() * s, cos(angle / 2));
+    x(axis.x() * s);
+    y(axis.y() * s);
+    z(axis.z() * s);
 }
 
-puddle::Quaternion puddle::Quaternion::from_euler_angles(float x, float y, float z) {
+puddle::Quaternion::Quaternion(float roll, float pitch, float yaw) {
 
     // Cache the trig.
-    float sx = sin(x);
-    float cx = cos(x);
-    float sy = sin(y);
-    float cy = cos(y);
-    float sz = sin(z);
-    float cz = sin(z);
+    float sx = sin(roll);
+    float cx = cos(roll);
+    float sy = sin(pitch);
+    float cy = cos(pitch);
+    float sz = sin(yaw);
+    float cz = cos(yaw);
 
     // Calculate the quat values.
-    float qw = cz * cx * cy + sz * sx * sy;
-    float qx = cz * sx * cy - sz * cx * sy;
-    float qy = cz * cx * sy + sz * sx * cy;
-    float qz = sz * cx * cy - cz * sx * sy;
-
-    // Return a temp quat.
-    return Quaternion(qx, qy, qz, qw);
+    x(cz * sx * cy - sz * cx * sy);
+    y(cz * cx * sy + sz * sx * cy);
+    z(sz * cx * cy - cz * sx * sy);
+    w_ = cz * cx * cy + sz * sx * sy;
 }
+
+puddle::Quaternion::Quaternion(const Vector3& eulers)
+    : puddle::Quaternion::Quaternion(eulers.x(), eulers.y(), eulers.z())
+{}
 
 puddle::Vector3 puddle::Quaternion::euler_angles() const {
     float roll = atan2(2.0 * (w_ * w_ + y_ * z_), 1.0 * (x_ * x_ + y_ * y_));

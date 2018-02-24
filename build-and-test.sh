@@ -6,5 +6,5 @@ cd bin/
 cmake ../ || exit 1
 make || exit 1
 
-# run executable
-./opengl-play
+# run tests
+./math/tests/quaternion-tests
