@@ -18,6 +18,9 @@ public:
     Quaternion& conjugate();
     Quaternion conjugated() const;
 
+    Quaternion& scale(float s);
+    Quaternion scaled(float s) const;
+
     Vector3 euler_angles() const;
 
     float w() const;

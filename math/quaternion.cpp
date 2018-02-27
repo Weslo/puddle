@@ -71,6 +71,18 @@ puddle::Quaternion puddle::Quaternion::conjugated() const {
     return puddle::Quaternion(*this).conjugate();
 }
 
+puddle::Quaternion& puddle::Quaternion::scale(float s) {
+    x(x() * s);
+    y(y() * s);
+    z(z() * s);
+    w(w() * s);
+    return *this;
+}
+
+puddle::Quaternion puddle::Quaternion::scaled(float s) const {
+    return puddle::Quaternion(*this).scale(s);
+}
+
 puddle::Vector3 puddle::Quaternion::euler_angles() const {
     float roll = atan2(2 * x() * w() - 2 * z() * y(), 1 - 2 * x() * x() - 2 * y() * y());
     float pitch = asin(2 * x() * z() + 2 * y() * w());
