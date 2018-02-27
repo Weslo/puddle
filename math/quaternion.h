@@ -15,6 +15,9 @@ public:
     Quaternion& normalize();
     Quaternion normalized() const;
 
+    Quaternion& conjugate();
+    Quaternion conjugated() const;
+
     Vector3 euler_angles() const;
 
     float w() const;

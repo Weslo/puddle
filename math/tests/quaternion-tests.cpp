@@ -22,7 +22,7 @@ void test_euler_to_quat(void) {
 void test_quat_normalize(void) {
     float epsilon { 0.01f };
     puddle::Quaternion not_normal(14, 11, 21, 4);
-    puddle::Quaternion normal = not_normal.normalized();
+    puddle::Quaternion normal(not_normal.normalized());
 
     TEST_CHECK(compare_float(not_normal.x(), 14, epsilon));
 
@@ -32,7 +32,18 @@ void test_quat_normalize(void) {
     TEST_CHECK(compare_float(normal.w(), 0.146, epsilon));
 }
 
+void test_quat_conjugate(void) {
+    float epsilon { 0.01f };
+    puddle::Quaternion quat(1, 2, 3, 4);
+    puddle::Quaternion conjugate(quat.conjugated());
+
+    TEST_CHECK(compare_float(quat.x(), 1, epsilon));
+    TEST_CHECK(compare_float(conjugate.x(), -1, epsilon));
+    TEST_CHECK(compare_float(conjugate.w(), 4, epsilon));
+}
+
 TEST_LIST = {
     { "euler to quat", test_euler_to_quat },
-    { "normalization", test_quat_normalize }
+    { "normalization", test_quat_normalize },
+    { "conjugation", test_quat_conjugate }
 };
