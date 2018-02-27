@@ -14,14 +14,25 @@ void test_euler_to_quat(void) {
     puddle::Quaternion quat(eulers);
     puddle::Vector3 converted(quat.euler_angles());
 
-    std::cout << "{ " << eulers.x() << ", " << eulers.y() << ", " << eulers.z() << " }" << std::endl;
-    std::cout << "{ " << quat.x() << ", " << quat.y() << ", " << quat.z() << ", " << quat.w() << " }" << std::endl;
-    std::cout << "{ " << converted.x() << ", " << converted.y() << ", " << converted.z() << " }" << std::endl;
     TEST_CHECK(compare_float(converted.x(), eulers.x(), epsilon));
     TEST_CHECK(compare_float(converted.y(), eulers.y(), epsilon));
     TEST_CHECK(compare_float(converted.z(), eulers.z(), epsilon));
 }
 
+void test_quat_normalize(void) {
+    float epsilon { 0.01f };
+    puddle::Quaternion not_normal(14, 11, 21, 4);
+    puddle::Quaternion normal = not_normal.normalized();
+
+    TEST_CHECK(compare_float(not_normal.x(), 14, epsilon));
+
+    TEST_CHECK(compare_float(normal.x(), 0.513, epsilon));
+    TEST_CHECK(compare_float(normal.y(), 0.403, epsilon));
+    TEST_CHECK(compare_float(normal.z(), 0.754, epsilon));
+    TEST_CHECK(compare_float(normal.w(), 0.146, epsilon));
+}
+
 TEST_LIST = {
-    { "test", test_euler_to_quat }
+    { "euler to quat", test_euler_to_quat },
+    { "normalization", test_quat_normalize }
 };

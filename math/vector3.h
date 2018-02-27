@@ -16,7 +16,7 @@ public:
     Vector3& z(float z);
 
     Vector3& set(float x, float y, float z);
-protected:
+private:
     float z_ { 0 };
 };
 }

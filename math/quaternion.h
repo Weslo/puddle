@@ -12,9 +12,13 @@ public:
     Quaternion(float roll, float pitch, float yaw);
     Quaternion(const Vector3& eulers);
 
+    Quaternion& normalize();
+    Quaternion normalized() const;
+
     Vector3 euler_angles() const;
 
     float w() const;
+    Quaternion& w(float w);
 
 protected:
     float w_ { 0 };

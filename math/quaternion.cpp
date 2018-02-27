@@ -47,6 +47,19 @@ puddle::Quaternion::Quaternion(const Vector3& eulers)
     : puddle::Quaternion::Quaternion(eulers.x(), eulers.y(), eulers.z())
 {}
 
+puddle::Quaternion& puddle::Quaternion::normalize() {
+    float magnitude = sqrt(x() * x() + y() * y() + z() * z() + w() * w());
+    x(x() / magnitude);
+    y(y() / magnitude);
+    z(z() / magnitude);
+    w(w() / magnitude);
+    return *this;
+}
+
+puddle::Quaternion puddle::Quaternion::normalized() const {
+    return puddle::Quaternion(*this).normalize();
+}
+
 puddle::Vector3 puddle::Quaternion::euler_angles() const {
     float roll = atan2(2 * x() * w() - 2 * z() * y(), 1 - 2 * x() * x() - 2 * y() * y());
     float pitch = asin(2 * x() * z() + 2 * y() * w());
@@ -61,4 +74,9 @@ puddle::Vector3 puddle::Quaternion::euler_angles() const {
 
 float puddle::Quaternion::w() const {
     return w_;
+}
+
+puddle::Quaternion& puddle::Quaternion::w(float w) {
+    w_ = w;
+    return *this;
 }

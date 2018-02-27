@@ -17,7 +17,7 @@ public:
     Vector2& y(float y);
 
     Vector2& set(float x, float y);
-protected:
+private:
     float x_ { 0 };
     float y_ { 0 };
 };
