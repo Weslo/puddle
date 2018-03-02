@@ -47,6 +47,10 @@ puddle::Quaternion::Quaternion(const Vector3& eulers)
     : puddle::Quaternion::Quaternion(eulers.x(), eulers.y(), eulers.z())
 {}
 
+puddle::Quaternion puddle::Quaternion::operator*(const Quaternion& other) const {
+    return multiply(other);
+}
+
 puddle::Quaternion& puddle::Quaternion::normalize() {
     float magnitude = sqrt(x() * x() + y() * y() + z() * z() + w() * w());
     x(x() / magnitude);
@@ -60,27 +64,21 @@ puddle::Quaternion puddle::Quaternion::normalized() const {
     return puddle::Quaternion(*this).normalize();
 }
 
-puddle::Quaternion& puddle::Quaternion::conjugate() {
-    x(-x());
-    y(-y());
-    z(-z());
-    return *this;
+puddle::Quaternion puddle::Quaternion::conjugate() const {
+    return puddle::Quaternion(-x(), -y(), -z(), w());
 }
 
-puddle::Quaternion puddle::Quaternion::conjugated() const {
-    return puddle::Quaternion(*this).conjugate();
+puddle::Quaternion puddle::Quaternion::scale(float s) const {
+    return puddle::Quaternion(x() * s, y() * s, z() * s, w() * s);
 }
 
-puddle::Quaternion& puddle::Quaternion::scale(float s) {
-    x(x() * s);
-    y(y() * s);
-    z(z() * s);
-    w(w() * s);
-    return *this;
-}
-
-puddle::Quaternion puddle::Quaternion::scaled(float s) const {
-    return puddle::Quaternion(*this).scale(s);
+puddle::Quaternion puddle::Quaternion::multiply(const puddle::Quaternion& other) const {
+    return Quaternion(
+        x() * other.w() + z() * other.y() - y() * other.z() + w() * other.x(),
+        x() * other.z() - z() * other.x() + y() * other.w() + w() * other.y(),
+        -x() * other.y() + z() * other.w() + y() * other.x() + w() * other.z(),
+        -x() * other.x() - z() * other.z() - y() * other.y() + w() * other.w()
+    );
 }
 
 puddle::Vector3 puddle::Quaternion::euler_angles() const {

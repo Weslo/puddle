@@ -35,7 +35,7 @@ void test_quat_normalize(void) {
 void test_quat_conjugate(void) {
     float epsilon { 0.01f };
     puddle::Quaternion quat(1, 2, 3, 4);
-    puddle::Quaternion conjugate(quat.conjugated());
+    puddle::Quaternion conjugate(quat.conjugate());
 
     TEST_CHECK(compare_float(quat.x(), 1, epsilon));
     TEST_CHECK(compare_float(conjugate.x(), -1, epsilon));
@@ -45,16 +45,30 @@ void test_quat_conjugate(void) {
 void test_quat_scale(void) {
     float epsilon { 0.01f };
     puddle::Quaternion quat(1, 2, 3, 4);
-    puddle::Quaternion scaled(quat.scaled(6));
+    puddle::Quaternion scaled(quat.scale(6));
 
     TEST_CHECK(compare_float(quat.x(), 1, epsilon));
     TEST_CHECK(compare_float(scaled.x(), 6, epsilon));
     TEST_CHECK(compare_float(scaled.w(), 24, epsilon));
 }
 
+void test_quat_mult(void) {
+    float epsilon { 0.01f };
+    puddle::Quaternion a(30, 60, 40);
+    puddle::Quaternion b(20, 0, 0);
+    puddle::Quaternion result(a * b);
+    puddle::Quaternion compare(50, 60, 40);
+
+    TEST_CHECK(compare_float(result.x(), compare.x(), epsilon));
+    TEST_CHECK(compare_float(result.y(), compare.y(), epsilon));
+    TEST_CHECK(compare_float(result.z(), compare.z(), epsilon));
+    TEST_CHECK(compare_float(result.w(), compare.w(), epsilon));
+}
+
 TEST_LIST = {
     { "euler to quat", test_euler_to_quat },
     { "normalization", test_quat_normalize },
     { "conjugation", test_quat_conjugate },
-    { "scaling", test_quat_scale }
+    { "scaling", test_quat_scale },
+    { "multiplication", test_quat_mult }
 };

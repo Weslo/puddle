@@ -12,14 +12,14 @@ public:
     Quaternion(float roll, float pitch, float yaw);
     Quaternion(const Vector3& eulers);
 
+    Quaternion operator*(const Quaternion& other) const;
+
     Quaternion& normalize();
     Quaternion normalized() const;
 
-    Quaternion& conjugate();
-    Quaternion conjugated() const;
-
-    Quaternion& scale(float s);
-    Quaternion scaled(float s) const;
+    Quaternion conjugate() const;
+    Quaternion scale(float s) const;
+    Quaternion multiply(const Quaternion& other) const;
 
     Vector3 euler_angles() const;
 
