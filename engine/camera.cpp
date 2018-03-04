@@ -1,7 +1,7 @@
 #include "camera.h"
 
 puddle::Camera::Camera() : puddle::GameObject() {
-    position_.set(0.0f, 0.0f, -3.0f);
+    position(puddle::Vector3(0.0f, 0.0f, -3.0f));
 }
 
 puddle::Camera::~Camera() {
@@ -19,7 +19,7 @@ puddle::Camera& puddle::Camera::aspect_ratio(float aspect_ratio) {
 }
 
 glm::mat4x4 puddle::Camera::view() const {
-    return glm::translate(view_, glm::vec3(position_.x(), position_.y(), position_.z()));
+    return glm::translate(view_, glm::vec3(position().x(), position().y(), position().z()));
 }
 
 glm::mat4x4 puddle::Camera::projection() const {

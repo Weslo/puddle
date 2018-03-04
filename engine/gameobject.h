@@ -11,9 +11,12 @@ public:
     GameObject();
     virtual ~GameObject();
 
-    puddle::Vector3& position();
-    puddle::Quaternion& rotation();
-protected:
+    puddle::Vector3 position() const;
+    puddle::GameObject& position(const Vector3& position);
+
+    puddle::Quaternion rotation() const;
+    puddle::GameObject& rotation(const Quaternion& quaternion);
+private:
     puddle::Vector3 position_;
     puddle::Quaternion rotation_;
 };
