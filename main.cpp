@@ -3,12 +3,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <iostream>
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
+#include "math/math.hpp"
 #include "math/glm/gtx/quaternion.hpp"
 #include "math/quaternion.h"
 #include "math/vector3.h"
 #include "engine/camera.h"
+#include "engine/gameobject.h"
 #include "input/mouse.h"
 #include "rendering/mesh.h"
 #include "rendering/shader.h"
@@ -48,13 +51,16 @@ int main(int argc, char** argv) {
     gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 
     // Lock cursor to screen.
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    // glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     // Enable z-buffer.
     glEnable(GL_DEPTH_TEST);
 
     // Create a camera.
     auto camera = puddle::Camera();
+
+    // Create a game object for the cube.
+    auto cube = puddle::GameObject();
 
     // Create a texture.
     auto texture = puddle::Texture("../assets/checkermap.png");
@@ -105,9 +111,6 @@ int main(int argc, char** argv) {
     };
     auto mesh = puddle::Mesh(cube_verts, sizeof(cube_verts));
 
-    // Create a model matrix for the cube.
-    glm::mat4x4 model;
-
     // Create a shader and use it.
     auto shader = puddle::Shader("../assets/diffuse.vert", "../assets/diffuse.frag");
     shader.Use();
@@ -144,9 +147,15 @@ int main(int argc, char** argv) {
             camera.position().z(camera.position().z() - camera_speed * glfwGetTime());
         }
 
-        // Rotate the cube.
-        puddle::Quaternion rot = puddle::Quaternion(2.0f * M_PI * (90.0f / 360.0f), puddle::Vector3(0, 1, 0));
-        model = glm::toMat4(glm::quat(rot.x(), rot.y(), rot.z(), rot.w()));
+        cube.rotation() = puddle::Quaternion(puddle::math::degrees_to_radians(glfwGetTime() * 10), puddle::Vector3(0, 1, 0));
+
+        // Calculate cube rotation.
+        glm::mat4x4 rotation = glm::toMat4(glm::quat(cube.rotation().w(), cube.rotation().x(), cube.rotation().y(), cube.rotation().z()));
+
+        // Apply matrix transformations to cube.
+        glm::mat4x4 model;
+        glm::translate(model, glm::vec3(cube.position().x(), cube.position().y(), cube.position().z()));
+        model *= rotation;
         shader.SetMatrix4x4("model", model);
         shader.SetMatrix4x4("view", camera.view());
         shader.SetMatrix4x4("projection", camera.projection());
