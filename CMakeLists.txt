@@ -19,7 +19,7 @@ if(APPLE)
 
     set(LIBS ${COREVID_LIB} ${OPENGL_LIB} ${IOKIT_LIB} ${COCOA_LIB} ${CARBON_LIB})
     set(CMAKE_CXX_COMPILER "clang++")
-    set(CMAKE_CXX_STANDARD 11)
+    set(CMAKE_CXX_STANDARD 14)
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -stdlib=libc++ -lglfw")
 endif(APPLE)
 

@@ -57,7 +57,8 @@ int main(int argc, char** argv) {
     glEnable(GL_DEPTH_TEST);
 
     // Create a camera.
-    auto camera = puddle::Camera();
+    auto camera = (new puddle::GameObject)->add_component<puddle::Camera>();
+    camera->gameobject()->position(puddle::Vector3(0, 0, -3.0f));
 
     // Create a game object for the cube.
     auto cube = puddle::GameObject();
@@ -125,7 +126,7 @@ int main(int argc, char** argv) {
         glViewport(0, 0, width, height);
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        camera.aspect_ratio(width / height);
+        camera->aspect_ratio(width / height);
 
         // Update cursor input.
         double screen_x, screen_y;
@@ -134,17 +135,18 @@ int main(int argc, char** argv) {
 
         // Update WASD input.
         float camera_speed = 0.01f;
+        puddle::Vector3 camera_pos = camera->gameobject()->position();
         if(glfwGetKey(window, GLFW_KEY_A)) {
-            camera.position().x(camera.position().x() + camera_speed * glfwGetTime());
+            camera->gameobject()->position().x(camera_pos.x() + camera_speed * glfwGetTime());
         }
         if(glfwGetKey(window, GLFW_KEY_D)) {
-            camera.position().x(camera.position().x() - camera_speed * glfwGetTime());
+            camera->gameobject()->position().x(camera_pos.x() - camera_speed * glfwGetTime());
         }
         if(glfwGetKey(window, GLFW_KEY_W)) {
-            camera.position().z(camera.position().z() + camera_speed * glfwGetTime());
+            camera->gameobject()->position().z(camera_pos.z() + camera_speed * glfwGetTime());
         }
         if(glfwGetKey(window, GLFW_KEY_S)) {
-            camera.position().z(camera.position().z() - camera_speed * glfwGetTime());
+            camera->gameobject()->position().z(camera_pos.z() - camera_speed * glfwGetTime());
         }
 
         cube.rotation() = puddle::Quaternion(puddle::math::degrees_to_radians(glfwGetTime() * 10), puddle::Vector3(0, 1, 0));
@@ -157,8 +159,8 @@ int main(int argc, char** argv) {
         glm::translate(model, glm::vec3(cube.position().x(), cube.position().y(), cube.position().z()));
         model *= rotation;
         shader.SetMatrix4x4("model", model);
-        shader.SetMatrix4x4("view", camera.view());
-        shader.SetMatrix4x4("projection", camera.projection());
+        shader.SetMatrix4x4("view", camera->view());
+        shader.SetMatrix4x4("projection", camera->projection());
 
         // Draw the cube.
         glDrawArrays(GL_TRIANGLES, 0, 36);

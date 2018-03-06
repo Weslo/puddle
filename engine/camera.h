@@ -7,13 +7,11 @@
 #include "../math/glm/gtc/matrix_transform.hpp"
 
 namespace puddle {
-class Camera : public GameObject {
+class Camera : public Component {
+    using Component::Component;
 public:
-    Camera();
-    ~Camera() override;
-
     float aspect_ratio() const;
-    Camera& aspect_ratio(float aspect_ratio);
+    void aspect_ratio(float aspect_ratio);
 
     glm::mat4x4 view() const;
     glm::mat4x4 projection() const;
