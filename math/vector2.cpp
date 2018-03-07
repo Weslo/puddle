@@ -26,6 +26,16 @@ puddle::Vector2& puddle::Vector2::operator+=(const puddle::Vector2& other) {
     return *this;
 }
 
+puddle::Vector2 puddle::Vector2::operator-(const puddle::Vector2& other) const {
+    return puddle::Vector2(x() - other.x(), y() - other.y());
+}
+
+puddle::Vector2& puddle::Vector2::operator-=(const puddle::Vector2& other) {
+    x_ -= other.x();
+    y_ -= other.y();
+    return *this;
+}
+
 float puddle::Vector2::x() const {
     return x_;
 }
