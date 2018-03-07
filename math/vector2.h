@@ -7,6 +7,11 @@ public:
     Vector2();
     Vector2(float x, float y);
 
+    static Vector2 up();
+    static Vector2 down();
+    static Vector2 left();
+    static Vector2 right();
+
     bool operator==(const Vector2& other) const;
     bool operator!=(const Vector2& other) const;
 

@@ -9,6 +9,30 @@ puddle::Vector3::Vector3(float x, float y, float z)
     , z_ { z }
 {}
 
+puddle::Vector3 puddle::Vector3::up() {
+    return puddle::Vector3(0, 1, 0);
+}
+
+puddle::Vector3 puddle::Vector3::down() {
+    return puddle::Vector3(0, -1, 0);
+}
+
+puddle::Vector3 puddle::Vector3::left() {
+    return puddle::Vector3(-1, 0, 0);
+}
+
+puddle::Vector3 puddle::Vector3::right() {
+    return puddle::Vector3(1, 0, 0);
+}
+
+puddle::Vector3 puddle::Vector3::forward() {
+    return puddle::Vector3(0, 0, 1);
+}
+
+puddle::Vector3 puddle::Vector3::back() {
+    return puddle::Vector3(0, 0, -1);
+}
+
 bool puddle::Vector3::operator==(const puddle::Vector3& other) const {
     return x() == other.x()
         && y() == other.y()

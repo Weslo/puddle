@@ -137,16 +137,16 @@ int main(int argc, char** argv) {
         float camera_speed = 0.01f * glfwGetTime();
         puddle::Vector3 camera_pos = camera->gameobject()->position();
         if(glfwGetKey(window, GLFW_KEY_A)) {
-            camera->gameobject()->position().x() += camera_speed;
+            camera->gameobject()->position() += puddle::Vector3::right() * camera_speed;
         }
         if(glfwGetKey(window, GLFW_KEY_D)) {
-            camera->gameobject()->position().x() -= camera_speed;
+            camera->gameobject()->position() += puddle::Vector3::left() * camera_speed;
         }
         if(glfwGetKey(window, GLFW_KEY_W)) {
-            camera->gameobject()->position().z() += camera_speed;
+            camera->gameobject()->position() += puddle::Vector3::forward() * camera_speed;
         }
         if(glfwGetKey(window, GLFW_KEY_S)) {
-            camera->gameobject()->position().z() -= camera_speed;
+            camera->gameobject()->position() += puddle::Vector3::back() * camera_speed;
         }
 
         cube.rotation() = puddle::Quaternion(puddle::math::degrees_to_radians(glfwGetTime() * 10), puddle::Vector3(0, 1, 0));

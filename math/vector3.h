@@ -7,6 +7,13 @@ public:
     Vector3();
     Vector3(float x, float y, float z);
 
+    static Vector3 up();
+    static Vector3 down();
+    static Vector3 left();
+    static Vector3 right();
+    static Vector3 forward();
+    static Vector3 back();
+
     bool operator==(const Vector3& other) const;
     bool operator!=(const Vector3& other) const;
 
