@@ -52,9 +52,21 @@ void test_vector2_subtraction() {
     TEST_CHECK(b == puddle::Vector2(4, 1));
 }
 
+void test_vector2_multiplication() {
+    puddle::Vector2 vec(1, 2);
+
+    TEST_CHECK(vec * 2 == puddle::Vector2(2, 4));
+    TEST_CHECK(3 * vec == puddle::Vector2(3, 6));
+
+    vec *= 4;
+
+    TEST_CHECK(vec == puddle::Vector2(4, 8));
+}
+
 TEST_LIST = {
     { "construction", test_vector2_construct },
     { "equality", test_vector2_equality },
     { "addition", test_vector2_addition },
-    { "subtraction", test_vector2_subtraction }
+    { "subtraction", test_vector2_subtraction },
+    { "multiplication", test_vector2_multiplication }
 };
