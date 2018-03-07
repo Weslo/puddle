@@ -22,11 +22,11 @@ public:
     Vector2 operator/(float scalar) const;
     Vector2& operator/=(float scalar);
 
+    float& x();
     float x() const;
-    float y() const;
 
-    Vector2& x(float x);
-    Vector2& y(float y);
+    float& y();
+    float y() const;
 
     Vector2& set(float x, float y);
 private:

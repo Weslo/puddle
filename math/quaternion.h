@@ -1,10 +1,9 @@
 #ifndef PUDDLE_QUATERNION_H_
 #define PUDDLE_QUATERNION_H_
 
-#include "vector3.h"
-
 namespace puddle {
-class Quaternion : public Vector3 {
+class Vector3;
+class Quaternion {
 public:
     Quaternion();
     Quaternion(float x, float y, float z, float w);
@@ -23,10 +22,15 @@ public:
 
     Vector3 euler_angles() const;
 
+    float x() const;
+    float y() const;
+    float z() const;
     float w() const;
-    Quaternion& w(float w);
 
-protected:
+private:
+    float x_ { 0 };
+    float y_ { 0 };
+    float z_ { 0 };
     float w_ { 0 };
 };
 }

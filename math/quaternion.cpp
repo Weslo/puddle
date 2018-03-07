@@ -1,13 +1,16 @@
 #include "quaternion.h"
 #include <math.h>
 #include "math.hpp"
+#include "vector3.h"
 
 puddle::Quaternion::Quaternion()
     : Quaternion(0, 0, 0, 0)
 {}
 
 puddle::Quaternion::Quaternion(float x, float y, float z, float w)
-    : Vector3::Vector3(x, y, z)
+    : x_ { x }
+    , y_ { y }
+    , z_ { z }
     , w_ { w }
 {}
 
@@ -15,9 +18,9 @@ puddle::Quaternion::Quaternion(float angle, const puddle::Vector3& axis)
     : w_ { cos(angle / 2) }
 {
     float s = sin(angle / 2);
-    x(axis.x() * s);
-    y(axis.y() * s);
-    z(axis.z() * s);
+    x_ = axis.x() * s;
+    y_ = axis.y() * s;
+    z_ = axis.z() * s;
 }
 
 puddle::Quaternion::Quaternion(float roll, float pitch, float yaw) {
@@ -37,9 +40,9 @@ puddle::Quaternion::Quaternion(float roll, float pitch, float yaw) {
 
     // Calculate the quat values.
     // Y and Z are swapped to convert to match coordinate spaces.
-    x(sx * cy * cz + cx * sy * sz);
-    y(cx * sy * cz - sx * cy * sz);
-    z(cx * cy * sz + sx * sy * cz);
+    x_ = sx * cy * cz + cx * sy * sz;
+    y_ = cx * sy * cz - sx * cy * sz;
+    z_ = cx * cy * sz + sx * sy * cz;
     w_ = cx * cy * cz - sx * sy * sz;
 }
 
@@ -53,10 +56,10 @@ puddle::Quaternion puddle::Quaternion::operator*(const Quaternion& other) const 
 
 puddle::Quaternion& puddle::Quaternion::normalize() {
     float magnitude = sqrt(x() * x() + y() * y() + z() * z() + w() * w());
-    x(x() / magnitude);
-    y(y() / magnitude);
-    z(z() / magnitude);
-    w(w() / magnitude);
+    x_ = x() / magnitude;
+    y_ = y() / magnitude;
+    z_ = z() / magnitude;
+    w_ = w() / magnitude;
     return *this;
 }
 
@@ -93,11 +96,18 @@ puddle::Vector3 puddle::Quaternion::euler_angles() const {
     return Vector3(roll, pitch, yaw);
 }
 
-float puddle::Quaternion::w() const {
-    return w_;
+float puddle::Quaternion::x() const {
+    return x_;
 }
 
-puddle::Quaternion& puddle::Quaternion::w(float w) {
-    w_ = w;
-    return *this;
+float puddle::Quaternion::y() const {
+    return y_;
+}
+
+float puddle::Quaternion::z() const {
+    return z_;
+}
+
+float puddle::Quaternion::w() const {
+    return w_;
 }

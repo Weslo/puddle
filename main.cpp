@@ -134,19 +134,19 @@ int main(int argc, char** argv) {
         puddle::input::Mouse::screen_pos(screen_x, screen_y);
 
         // Update WASD input.
-        float camera_speed = 0.01f;
+        float camera_speed = 0.01f * glfwGetTime();
         puddle::Vector3 camera_pos = camera->gameobject()->position();
         if(glfwGetKey(window, GLFW_KEY_A)) {
-            camera->gameobject()->position().x(camera_pos.x() + camera_speed * glfwGetTime());
+            camera->gameobject()->position().x() += camera_speed;
         }
         if(glfwGetKey(window, GLFW_KEY_D)) {
-            camera->gameobject()->position().x(camera_pos.x() - camera_speed * glfwGetTime());
+            camera->gameobject()->position().x() -= camera_speed;
         }
         if(glfwGetKey(window, GLFW_KEY_W)) {
-            camera->gameobject()->position().z(camera_pos.z() + camera_speed * glfwGetTime());
+            camera->gameobject()->position().z() += camera_speed;
         }
         if(glfwGetKey(window, GLFW_KEY_S)) {
-            camera->gameobject()->position().z(camera_pos.z() - camera_speed * glfwGetTime());
+            camera->gameobject()->position().z() -= camera_speed;
         }
 
         cube.rotation() = puddle::Quaternion(puddle::math::degrees_to_radians(glfwGetTime() * 10), puddle::Vector3(0, 1, 0));
