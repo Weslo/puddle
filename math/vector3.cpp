@@ -9,14 +9,62 @@ puddle::Vector3::Vector3(float x, float y, float z)
     , z_ { z }
 {}
 
-bool puddle::Vector3::operator==(const Vector3& other) const {
-    return x() == x()
-        && y() == y()
-        && z() == z();
+bool puddle::Vector3::operator==(const puddle::Vector3& other) const {
+    return x() == other.x()
+        && y() == other.y()
+        && z() == other.z();
 }
 
-bool puddle::Vector3::operator!=(const Vector3& other) const {
+bool puddle::Vector3::operator!=(const puddle::Vector3& other) const {
     return !operator==(other);
+}
+
+puddle::Vector3 puddle::Vector3::operator+(const puddle::Vector3& other) const {
+    return puddle::Vector3(x() + other.x(), y() + other.y(), z() + other.z());
+}
+
+puddle::Vector3& puddle::Vector3::operator+=(const puddle::Vector3& other) {
+    x_ += other.x();
+    y_ += other.y();
+    z_ += other.z();
+    return *this;
+}
+
+puddle::Vector3 puddle::Vector3::operator-(const puddle::Vector3& other) const {
+    return puddle::Vector3(x() - other.x(), y() - other.y(), z() - other.z());
+}
+
+puddle::Vector3& puddle::Vector3::operator-=(const puddle::Vector3& other) {
+    x_ -= other.x();
+    y_ -= other.y();
+    z_ -= other.z();
+    return *this;
+}
+
+puddle::Vector3 puddle::Vector3::operator*(float scalar) const {
+    return puddle::Vector3(x() * scalar, y() * scalar, z() * scalar);
+}
+
+puddle::Vector3 puddle::operator*(float scalar, const puddle::Vector3& vec) {
+    return vec * scalar;
+}
+
+puddle::Vector3& puddle::Vector3::operator*=(float scalar) {
+    x_ *= scalar;
+    y_ *= scalar;
+    z_ *= scalar;
+    return *this;
+}
+
+puddle::Vector3 puddle::Vector3::operator/(float scalar) const {
+    return puddle::Vector3(x() / scalar, y() / scalar, z() / scalar);
+}
+
+puddle::Vector3& puddle::Vector3::operator/=(float scalar) {
+    x_ /= scalar;
+    y_ /= scalar;
+    z_ /= scalar;
+    return *this;
 }
 
 float& puddle::Vector3::x() {

@@ -10,6 +10,18 @@ public:
     bool operator==(const Vector3& other) const;
     bool operator!=(const Vector3& other) const;
 
+    Vector3 operator+(const Vector3& other) const;
+    Vector3& operator+=(const Vector3& other);
+
+    Vector3 operator-(const Vector3& other) const;
+    Vector3& operator-=(const Vector3& other);
+
+    Vector3 operator*(float scalar) const;
+    Vector3& operator*=(float scalar);
+
+    Vector3 operator/(float scalar) const;
+    Vector3& operator/=(float scalar);
+
     float& x();
     float x() const;
 
@@ -25,6 +37,8 @@ private:
     float y_ { 0 };
     float z_ { 0 };
 };
+
+Vector3 operator*(float scalar, const Vector3& vec);
 }
 
 #endif
