@@ -8,3 +8,4 @@ make || exit 1
 
 # run tests
 ./math/tests/quaternion-tests
+./math/tests/vector2-tests

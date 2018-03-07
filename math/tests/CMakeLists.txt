@@ -7,3 +7,8 @@ add_executable(quaternion-tests
     ../quaternion.cpp
     quaternion-tests.cpp
     ../../acutest/acutest.h)
+
+add_executable(vector2-tests
+    ../vector2.cpp
+    vector2-tests.cpp
+    ../../acutest/acutest.h)
