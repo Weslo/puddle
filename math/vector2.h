@@ -19,6 +19,9 @@ public:
     Vector2 operator*(float scalar) const;
     Vector2& operator*=(float scalar);
 
+    Vector2 operator/(float scalar) const;
+    Vector2& operator/=(float scalar);
+
     float x() const;
     float y() const;
 

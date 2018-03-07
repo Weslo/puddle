@@ -50,6 +50,16 @@ puddle::Vector2& puddle::Vector2::operator*=(float scalar) {
     return *this;
 }
 
+puddle::Vector2 puddle::Vector2::operator/(float scalar) const {
+    return puddle::Vector2(x() / scalar, y() / scalar);
+}
+
+puddle::Vector2& puddle::Vector2::operator/=(float scalar) {
+    x_ /= scalar;
+    y_ /= scalar;
+    return *this;
+}
+
 float puddle::Vector2::x() const {
     return x_;
 }

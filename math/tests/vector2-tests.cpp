@@ -63,10 +63,21 @@ void test_vector2_multiplication() {
     TEST_CHECK(vec == puddle::Vector2(4, 8));
 }
 
+void test_vector2_division() {
+    puddle::Vector2 vec(10, 20);
+
+    TEST_CHECK(vec / 2 == puddle::Vector2(5, 10));
+
+    vec /= 5;
+
+    TEST_CHECK(vec == puddle::Vector2(2, 4));
+}
+
 TEST_LIST = {
     { "construction", test_vector2_construct },
     { "equality", test_vector2_equality },
     { "addition", test_vector2_addition },
     { "subtraction", test_vector2_subtraction },
-    { "multiplication", test_vector2_multiplication }
+    { "multiplication", test_vector2_multiplication },
+    { "division", test_vector2_division }
 };
