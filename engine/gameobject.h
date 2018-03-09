@@ -16,10 +16,10 @@ public:
     virtual ~GameObject();
 
     puddle::Vector3& position();
-    void position(const Vector3& position);
+    puddle::Vector3 position() const;
 
     puddle::Quaternion& rotation();
-    void rotation(const Quaternion& quaternion);
+    puddle::Quaternion rotation() const;
 
     template<class T>
     T* const add_component() {

@@ -58,7 +58,7 @@ int main(int argc, char** argv) {
 
     // Create a camera.
     auto camera = (new puddle::GameObject)->add_component<puddle::Camera>();
-    camera->gameobject()->position(puddle::Vector3(0, 0, -3.0f));
+    camera->gameobject()->position() = puddle::Vector3(0, 0, -3.0f);
 
     // Create a game object for the cube.
     auto cube = puddle::GameObject();
