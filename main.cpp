@@ -6,16 +6,8 @@
 #include <iostream>
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
-#include "math/math.hpp"
-#include "math/glm/gtx/quaternion.hpp"
-#include "math/quaternion.h"
-#include "math/vector3.h"
-#include "engine/camera.h"
-#include "engine/gameobject.h"
-#include "input/mouse.h"
-#include "rendering/mesh.h"
-#include "rendering/shader.h"
-#include "rendering/texture.h"
+#include "glm/gtx/quaternion.hpp"
+#include "puddle.h"
 
 // Handle a GLFW error.
 void HandleGlfwError(int error, const char* description) {

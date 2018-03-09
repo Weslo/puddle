@@ -2,8 +2,8 @@
 #define PUDDLE_SHADER_H_
 
 #include "GLFW/glfw3.h"
-#include "../math/glm/mat4x4.hpp"
-#include "../math/glm/gtc/type_ptr.hpp"
+#include "../../glm/mat4x4.hpp"
+#include "../../glm/gtc/type_ptr.hpp"
 
 // Virtual interface for a GLSL shader.
 namespace puddle {

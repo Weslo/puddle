@@ -2,9 +2,9 @@
 #define PUDDLE_CAMERA_H_
 
 #include "gameobject.h"
-#include "../math/glm/vec3.hpp"
-#include "../math/glm/mat4x4.hpp"
-#include "../math/glm/gtc/matrix_transform.hpp"
+#include "../../glm/vec3.hpp"
+#include "../../glm/mat4x4.hpp"
+#include "../../glm/gtc/matrix_transform.hpp"
 
 namespace puddle {
 class Camera : public Component {

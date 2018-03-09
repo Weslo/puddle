@@ -1,5 +1,5 @@
-include_directories("${PROJECT_SOURCE_DIR}/acutest")
-include_directories("${PROJECT_SOURCE_DIR}/math")
+include_directories("${PROJECT_SOURCE_DIR}/puddle/acutest")
+include_directories("${PROJECT_SOURCE_DIR}/puddle/math")
 
 add_executable(quaternion-tests
     ../vector2.cpp

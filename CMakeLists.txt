@@ -23,22 +23,23 @@ if(APPLE)
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -stdlib=libc++ -lglfw")
 endif(APPLE)
 
-add_subdirectory(${PROJECT_SOURCE_DIR}/math/glm)
+add_subdirectory(${PROJECT_SOURCE_DIR}/glm)
 
 include_directories(
-    ${PROJECT_SOURCE_DIR}/engine
     ${PROJECT_SOURCE_DIR}/glad
     ${PROJECT_SOURCE_DIR}/glad/KHR
-    ${PROJECT_SOURCE_DIR}/input
-    ${PROJECT_SOURCE_DIR}/math
-    ${PROJECT_SOURCE_DIR}/rendering
-    ${PROJECT_SOURCE_DIR}/utils)
+    ${PROJECT_SOURCE_DIR}/puddle
+    ${PROJECT_SOURCE_DIR}/puddle/engine
+    ${PROJECT_SOURCE_DIR}/puddle/input
+    ${PROJECT_SOURCE_DIR}/puddle/math
+    ${PROJECT_SOURCE_DIR}/puddle/rendering
+    ${PROJECT_SOURCE_DIR}/puddle/utils)
 
-file(GLOB ENGINE_SRC ./engine/*.cpp)
-file(GLOB INPUT_SRC ./input/*.cpp)
-file(GLOB MATH_SRC ./math/*.cpp)
-file(GLOB RENDERING_SRC ./rendering/*.cpp)
-file(GLOB UTILS_SRC ./utils/*.cpp)
+file(GLOB ENGINE_SRC ./puddle/engine/*.cpp)
+file(GLOB INPUT_SRC ./puddle/input/*.cpp)
+file(GLOB MATH_SRC ./puddle/math/*.cpp)
+file(GLOB RENDERING_SRC ./puddle/rendering/*.cpp)
+file(GLOB UTILS_SRC ./puddle/utils/*.cpp)
 
 add_executable(opengl-play
     main.cpp
@@ -52,4 +53,4 @@ add_executable(opengl-play
 target_link_libraries(opengl-play ${LIBS})
 
 # Include tests
-add_subdirectory(${PROJECT_SOURCE_DIR}/math/tests)
+add_subdirectory(${PROJECT_SOURCE_DIR}/puddle/math/tests)
